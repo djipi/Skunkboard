@@ -1,0 +1,41 @@
+-------------------
+JCP2 release README
+-------------------
+
+-----------------
+- What is JCP2? -
+-----------------
+
+JCP2 is a new version of the main program used for communication with the Skunkboard.
+It is based on the work done by Tursi and add new features.
+
+--------------
+- DISCLAIMER -
+--------------
+
+For requirements please consult the INSTALL file for more information
+about supported OS's and software requirements.
+
+The use of this software is entirely at your own risk.
+We can't be held responsible for damage done to your hardware and/or software.
+You may only use the ROM images if you own the cartridges itself.
+The use of commercial ROMs without owning the original cartridge is illegal
+in most countries and could result in fines and/or legal actions.
+
+The products, trademarks and/or brands used in these documents and/or
+sourcecode are owned by their respective companies and/or successors in
+interest.
+
+This software is released under the GPL v3 or later. For more information, read
+the LICENSE file.
+
+---------------------------------
+- JAGUAR FILE FORMATS supported -
+---------------------------------
+
+rom
+abs
+jag
+elf
+coff
+bin

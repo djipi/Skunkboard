@@ -1,0 +1,68 @@
+jcp2 usage
+----------
+To see the parameters available:
+jcp2 or jcp2 -?
+
+
+Known issues
+------------
+* After each memory Bank download, you have to do a jcp2 -r
+-- If you don't, Bank 2 may not be downloaded correctly
+--- The problem existed also in previous versions
+* jcp2 connects to the first Jaguar is detect
+-- You can change this behavior by using the -serial, -ubus and/or -uport parameters to connect to a specific Jaguar
+
+
+jcp2 2.0.6 note
+---------------
+* Merging with the source code, 8th September 2018, from Tursilion
+* Added the -ubus parameter
+* Fixed -uport parameter so it will handle port and not bus
+* Added libusb 1.0.22 support both for 32 and 64 bits
+* Switch the project to Visual Studio 2017
+* Added a communication timeout parameter
+* Put back the Skunkboard firmware update
+
+
+jcp2 2.0.5 note
+---------------
+* Add the Skunkboard serial number detection
+* Fixed the "MSVCR120D.dll not found" error message
+* Release version is available
+* Some changes in the parameters explanations (tentative)
+
+
+jcp2 2.0.4 note
+---------------
+* Project fix for the Windows XP compatibility problem
+
+
+jcp2 2.0.4 note
+---------------
+* Support Windows 64 bits
+* Add the USB port selection
+* Better parameters explanations (tentative)
+* Removed the Skunkboard firmware update
+
+
+jcp2 original Release note (ReleaseNote.txt) taken from a previous package
+--------------------------------------------------------------------------
+* Check how to return (depend on BIOS rev.); fix probably the infinite loop present in The Removers's JCP code
+* M68K Rom Dump has been modified
+* M68K DumpVersion has been modified
+* Bios Upgrade 1.02.04
+
+
+jcp History
+-----------
+7 jcp source packages were found here and there, and hereafter a brief summary
+
+1) The Removers jcp version doesn't handle the Skunkboard v3 (or at least they do not display options to handle it)
+-- They have added support for the Skunk console communication, but I do not know yet if such addition has been done in Tursi code as well
+-- At a point, in 2012, The Removers stopped to update their jcp and missed the changes/fixes done 6 months later by Tursi/A31Chris
+2) The jcp version in the skunkboard.zip is the oldest jcp source code I've found
+3) The Skunkboard_full_release.zip file was the container of the newest / most recent jcp source code releases (dated from the 12th August 2012)
+-- My work on jcp2 started with this source code
+4) The package available at https://github.com/tursilion/skunk_jcp can probably be considered as the latest / current one (8th September 2018)
+-- My work on jcp2 continued with this source code
+5) The CJ version has been added in this history but this version looks to follow the tursi code before the jcp2 version done by Tursi

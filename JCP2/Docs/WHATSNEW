@@ -1,0 +1,45 @@
+jcp2 2.0.6
+----------
+* Merging with the source code, 8th September 2018, from Tursilion
+* Added the -ubus parameter
+* Fixed -uport parameter so it will handle port and not bus
+* Added libusb 1.0.22 support both for 32 and 64 bits
+* Switch the project to Visual Studio 2017
+* Added a communication timeout parameter
+* Put back the Skunkboard firmware update
+
+
+jcp2 2.0.5
+----------
+* Add the Skunkboard serial number detection
+* Fixed the "MSVCR120D.dll not found" error message
+* Release version is available
+* Some changes in the parameters explanations (tentative)
+
+
+jcp2 2.0.4.0
+------------
+* Project fix for the Windows XP compatibility problem
+
+
+jcp2 2.0.4
+----------
+* Support Windows 64 bits
+* Add the USB port selection
+* Better parameters explanations (tentative)
+* Removed the Skunkboard firmware update
+
+
+---
+
+12 Sep 2008 - Added support for ABS binaries
+21 Sep 2008 - Added patches to enable OSX to build (Thanks to Belboz)
+ 4 Oct 2008 - Added word write option for machines with flakey power. Refactored the code to help shell authors with better helper functions.
+16 Oct 2008 - Moved word write into the ROM for BIOS 1.1.0, tweaked skunkCONSOLECLOSE to wait before closing, added BIOS upgrade code
+21 Oct 2008 - Patch to above release - make file loading more safe, fix flash memory access error
+25 Jan 2009 - Updated code for Skunkboard rev 2, fixes to Skunklib thanks to SebRmv
+ 4 Mar 2009 - Many more updates for SB revision 2, external console, additional safety tests
+ 6 Apr 2009 - BIOS 1.02.02 added. Improved -b parameter parsing. Implemented inline serial # check. RomDumper waits for console to close.
+
+
+ 

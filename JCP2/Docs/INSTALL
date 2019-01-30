@@ -1,0 +1,35 @@
+--------------------
+JCP2 release INSTALL
+--------------------
+
+
+REQUIREMENTS:
+-------------
+
+The minimum requirements for compiling jcp2 from source are:
+
+ o  LibUSB 0.1 or LibUSB 1.0.22
+ o  Visual Studio 2017
+ o  supported OS (Windows 32/64 bits)
+
+Previously supported OS (Linux or OSX); other
+OSs may work too but you may need to change the code and create a Makefile.
+
+For Windows, the lib and header file are provided for LibUSB 0.1. 
+For Linux or OSX, you must get these files yourself and set up LibUSB on your system correctly.
+http://libusb.sourceforge.net/
+
+The Makefile has to be done for people building under Linux or OSX.
+
+No official support is given for user-built binaries, however, if you are stuck you
+can always create an issue in the GitHub project.
+
+
+NOTES FOR COMPILING UNDER VISUAL STUDIO 2017:
+---------------------------------------------
+
+Win-VS2017 sub-directories contain the project and solution files.
+You may have to adapt such files to handle your own development environement,
+usualy to put the right include and library paths will be enough assuming you have all the requirements properly set.
+
+Assuming all went well, you will have either Debug or Release executables.
