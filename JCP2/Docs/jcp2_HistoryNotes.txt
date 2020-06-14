@@ -6,15 +6,22 @@ jcp2 or jcp2 -?
 
 Known issues
 ------------
-* After each memory Bank download, you have to do a jcp2 -r
--- If you don't, Bank 2 may not be downloaded correctly
---- The problem existed also in previous versions
-* jcp2 connects to the first Jaguar is detect
--- You can change this behavior by using the -serial, -ubus and/or -uport parameters to connect to a specific Jaguar
+* After each memory Bank download, jcp2 -r must be performed otherwise Bank 2 may not be downloaded correctly
+--- The problem is a legacy issue
+* jcp2 connects to the first detected Atari Jaguar
+-- This behavior can be changed by using the -serial, -ubus and/or -uport parameters in order to connect to a specific Atari Jaguar
 
 
-jcp2 2.0.6 note
----------------
+jcp2 2.07.00 note
+-----------------
+* Merging with the source code, 13th June 2020, from The Removers
+- Turned off their log file operation due to compilation problems with Visual Studio
+- The Removers extensions can be turned on/off during compilation
+* Added libusb 1.0.23 support both for 32 and 64 bits
+* Display the libusb version used
+
+jcp2 2.06.00 note
+-----------------
 * Merging with the source code, 8th September 2018, from Tursilion
 * Added the -ubus parameter
 * Fixed -uport parameter so it will handle port and not bus
@@ -23,22 +30,19 @@ jcp2 2.0.6 note
 * Added a communication timeout parameter
 * Put back the Skunkboard firmware update
 
-
-jcp2 2.0.5 note
----------------
-* Add the Skunkboard serial number detection
+jcp2 2.05.00 note
+-----------------
+* Add the Skunkboard serial number selection
 * Fixed the "MSVCR120D.dll not found" error message
 * Release version is available
 * Some changes in the parameters explanations (tentative)
 
-
-jcp2 2.0.4 note
----------------
+jcp2 2.04.00 (hotfix) note
+--------------------------
 * Project fix for the Windows XP compatibility problem
 
-
-jcp2 2.0.4 note
----------------
+jcp2 2.04.00 note
+-----------------
 * Support Windows 64 bits
 * Add the USB port selection
 * Better parameters explanations (tentative)
@@ -53,16 +57,32 @@ jcp2 original Release note (ReleaseNote.txt) taken from a previous package
 * Bios Upgrade 1.02.04
 
 
-jcp History
------------
-7 jcp source packages were found here and there, and hereafter a brief summary
+jcp packages history
+--------------------
+8 jcp source packages were found here and there, and hereafter a brief summary from the most recents
 
-1) The Removers jcp version doesn't handle the Skunkboard v3 (or at least they do not display options to handle it)
--- They have added support for the Skunk console communication, but I do not know yet if such addition has been done in Tursi code as well
--- At a point, in 2012, The Removers stopped to update their jcp and missed the changes/fixes done 6 months later by Tursi/A31Chris
-2) The jcp version in the skunkboard.zip is the oldest jcp source code I've found
-3) The Skunkboard_full_release.zip file was the container of the newest / most recent jcp source code releases (dated from the 12th August 2012)
--- My work on jcp2 started with this source code
-4) The package available at https://github.com/tursilion/skunk_jcp can probably be considered as the latest / current one (8th September 2018)
--- My work on jcp2 continued with this source code
-5) The CJ version has been added in this history but this version looks to follow the tursi code before the jcp2 version done by Tursi
+1) The Removers's package available at https://github.com/sbriais/skunk_jcp has been updated (13 Juin 2020)
+-- It contains the fork from tursilion version and enable the Removers extensions.
+-- jcp2 has integrated these extensions
+2) The package available at https://github.com/tursilion/skunk_jcp can probably be considered as the latest / current "official" one (8th September 2018)
+-- Work on jcp2 continued with this source code
+3) The Removers jcp version, rmvjcp.tar.gz, doesn't handle the Skunkboard v3 (or at least they do not display options to handle it)
+-- They have added support for the Skunk console communication, but it is unclear if such addition has been done in Tursi code as well
+-- At a point, in 2012, The Removers stopped to update their jcp version and missed the changes/fixes done 6 months later by Tursi/A31Chris
+4) The jcp version in the skunkboard.zip is the oldest jcp source code found
+5) The Skunkboard_full_release.zip file was the container of the newest / most recent jcp source code releases (dated from the 12th August 2012)
+-- Work on jcp2 started with this source code
+6) The CJ version has been added in this history but this version looks to follow the tursi code before the jcp2 version done by Tursi
+
+
+jcp previous changes history
+----------------------------
+12 Sep 2008 - Added support for ABS binaries
+21 Sep 2008 - Added patches to enable OSX to build (Thanks to Belboz)
+ 4 Oct 2008 - Added word write option for machines with flakey power. Refactored the code to help shell authors with better helper functions.
+16 Oct 2008 - Moved word write into the ROM for BIOS 1.1.0, tweaked skunkCONSOLECLOSE to wait before closing, added BIOS upgrade code
+21 Oct 2008 - Patch to above release - make file loading more safe, fix flash memory access error
+25 Jan 2009 - Updated code for Skunkboard rev 2, fixes to Skunklib thanks to SebRmv
+ 4 Mar 2009 - Many more updates for SB revision 2, external console, additional safety tests
+ 6 Apr 2009 - BIOS 1.02.02 added. Improved -b parameter parsing. Implemented inline serial # check. RomDumper waits for console to close.
+

@@ -21,6 +21,9 @@
     <ClCompile Include="..\jcp2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\jcp_handler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\romdump.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\standard_values.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\jcp_handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

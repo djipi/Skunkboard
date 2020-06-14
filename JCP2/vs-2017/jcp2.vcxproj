@@ -180,8 +180,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (libusb-1)|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);LIBUSB_1</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);LIBUSB_1;REMOVERS</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
@@ -189,7 +189,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AssemblerListingLocation>$(IntDir)asm\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)obj\</ObjectFileName>
-      <AdditionalIncludeDirectories>..\;C:\SDK\USB\libusb-1.0.22\include\libusb-1.0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;C:\SDK\USB\libusb-1.0.23\include\libusb-1.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>kernel32.lib;libusb-1.0.lib;advapi32.lib</AdditionalDependencies>
@@ -197,7 +197,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
-      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.22\MS32\dll</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.23\MS32\dll</AdditionalLibraryDirectories>
       <LinkStatus>
       </LinkStatus>
       <ImageHasSafeExceptionHandlers />
@@ -236,14 +236,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (libusb-1)|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);LIBUSB_1</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);LIBUSB_1;REMOVERS</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>C:\SDK\USB\libusb-1.0.22\include\libusb-1.0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDK\USB\libusb-1.0.23\include\libusb-1.0</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)asm\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)obj\</ObjectFileName>
     </ClCompile>
@@ -252,7 +252,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <MinimumRequiredVersion>5.02</MinimumRequiredVersion>
-      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.22\MS64\dll</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.23\MS64\dll</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (libusb-0)|x64'">
@@ -284,7 +284,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\;C:\SDK\USB\libusb-1.0.22\include\libusb-1.0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;C:\SDK\USB\libusb-1.0.23\include\libusb-1.0</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)asm\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)obj\</ObjectFileName>
     </ClCompile>
@@ -296,7 +296,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
-      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.22\MS32\dll</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.23\MS32\dll</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration />
       <LinkStatus>false</LinkStatus>
     </Link>
@@ -335,7 +335,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>C:\SDK\USB\libusb-1.0.22\include\libusb-1.0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDK\USB\libusb-1.0.23\include\libusb-1.0</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)asm\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)obj\</ObjectFileName>
     </ClCompile>
@@ -346,7 +346,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <MinimumRequiredVersion>5.02</MinimumRequiredVersion>
-      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.22\MS64\dll</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDK\USB\libusb-1.0.23\MS64\dll</AdditionalLibraryDirectories>
       <LinkStatus>false</LinkStatus>
       <LinkTimeCodeGeneration />
     </Link>
@@ -378,11 +378,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\jcp2.c" />
+    <ClCompile Include="..\jcp_handler.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dumpver.h" />
     <ClInclude Include="..\flashstub.h" />
     <ClInclude Include="..\flash_cof.h" />
+    <ClInclude Include="..\jcp_handler.h" />
     <ClInclude Include="..\readver.h" />
     <ClInclude Include="..\romdump.h" />
     <ClInclude Include="..\standard_values.h" />

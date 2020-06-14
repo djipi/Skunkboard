@@ -1,3 +1,4 @@
 .vs
 Win32
 X64
+*vcxproj.user

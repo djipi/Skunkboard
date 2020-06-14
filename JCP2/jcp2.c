@@ -110,6 +110,12 @@ Additional coding by Dilinger @ AA (2014-2019), no Copyright has been broken.
 #ifdef INCLUDE_BIOS_30002
 #include "upgrade30002.h"
 #endif
+#ifdef REMOVERS
+#ifndef _MSC_VER
+#pragma message "Enabling Removers extensions."
+#endif
+#include "jcp_handler.h"
+#endif
 
 #if defined(INCLUDE_BIOS_10204) || defined(INCLUDE_BIOS_30002)
 #define JCP_U_VERSION "[-U]"
@@ -126,8 +132,8 @@ Additional coding by Dilinger @ AA (2014-2019), no Copyright has been broken.
 #endif // _WIN64
 
 /* version major.minor.rev */
-#define JCPVERSION 0x020600
-#define	JCP_VERSION	"2.06.00"
+#define JCPVERSION 0x020700
+#define	JCP_VERSION	"2.07.00"
 /* ROM based address that we can blindly send dummy data to */
 #define DUMMYBASE 0xFFE000
 /* size of the work buffer (maximum ROM size plus slack) */
@@ -296,12 +302,24 @@ int main(int argc, char* argv[])
 	int	nUsed;
 	bool fExitLoop;
 	bool bOldConsole;
+#ifdef LIBUSB_1
+	const struct libusb_version *libusbver;
+#endif
 
 	// Display version
 #if defined(WIN32) || defined(WIN64)
-	printf("\njcp2 v%s - %s - built on %s\n\n", JCP_VERSION, PLATFORM_NAME, __DATE__);
+	printf("\njcp2 v%s - %s - built on %s\n", JCP_VERSION, PLATFORM_NAME, __DATE__);
 #else
-	printf("jcp2 v%02X.%02X.%02X built on %s\n\n", ((JCPVERSION&0xFF0000)>>16), ((JCPVERSION&0xFF00)>>8), (JCPVERSION&0xFF), __DATE__);
+	printf("jcp2 v%02X.%02X.%02X built on %s\n", ((JCPVERSION&0xFF0000)>>16), ((JCPVERSION&0xFF00)>>8), (JCPVERSION&0xFF), __DATE__);
+#endif
+#ifdef REMOVERS
+	printf("Compiled with the Removers extensions\n");
+#endif
+#ifndef LIBUSB_1
+	printf("Use libusb 0.1\n\n");
+#else
+	libusbver = libusb_get_version();
+	printf("Use libusb %i.%i.%i.%i%s    %s\n\n", libusbver->major, libusbver->minor, libusbver->micro, libusbver->nano, libusbver->rc, libusbver->describe);
 #endif
 
 	// Display options & arguments
@@ -342,7 +360,7 @@ int main(int argc, char* argv[])
 		printf("-x={external console} : Shell to external console application\n");
 		printf("\nUndocumented arguments\n");
 		printf("-! : Override flash\n");
-		printf("-* : Display the Skunkboard version and his serial number on an banner form\n");
+		printf("-* : Display the Skunkboard version and his serial number as a banner form\n");
 		printf("-v : Verbose mode\n");
 		printf("\n");
 	}
@@ -2118,16 +2136,20 @@ void Reattach(void)
 
 /* Does all the console functions */
 void HandleConsole(void)
-{	
+{
+#ifndef REMOVERS
 	int nTotalFileLength=0;		// bytes written
-	uchar block[4080];
-	unsigned short tmp;
-	int i, len;
-	char *p, *oldp;
-	int x;
 	char buf[4064];
 	int nLength;
 	int nDummy;
+#endif
+	uchar block[4080];
+	unsigned short tmp;
+	int i, len;
+#ifdef WIN32
+	char *p, *oldp;
+#endif
+	int x;
 
 	// If the user requested an external console, then we just have to shell out to it here
 	if (strlen(g_pszExtShell))
@@ -2282,6 +2304,7 @@ void HandleConsole(void)
 			// escape command (16 bit command)
 			switch ((block[2]<<8)|block[3])
 			{
+#ifndef REMOVERS
 					// nop - can be handy for synchronizing?
 				case 0:		
 					if (g_OptVerbose)
@@ -2533,7 +2556,54 @@ void HandleConsole(void)
 						fp=NULL;
 					}
 					break;
+#else
+					case 1:
+						serve_request((char *)block + 4, NULL);
+						break;
 
+					case 2:
+					{
+						char buf[4064];
+
+						serve_request((char *)block + 4, buf);
+						int nLength = MSGHDRSZ + get_message_length(buf); // add header size to content length
+
+						// write that input to the jag in the alternate buffer
+						WriteABlock((unsigned char*)buf, DUMMYBASE, -1, nLength);
+
+						// now we must not proceed from this point until the Jaguar
+						// acknowledges that block by clearing its length
+						do
+						{
+#ifdef LIBUSB_1
+							if (libusb_control_transfer(udev, 0xC0, 0xff, 4, nextez + 0xFEA, (char*)&poll, 2, ComTimeout) != 2)
+#else
+							if ((usb_control_msg(udev, 0xC0, 0xff, 4, nextez + 0xFEA, (char*)&poll, 2, ComTimeout) != 2))
+#endif
+							{
+								Reattach();
+							}
+						}
+						while (0 != poll);
+
+						// Now clear the buffer back to 0xffff so the Jag can use it again
+						tmp = 0xffff;
+						for (;;)
+						{
+#ifdef LIBUSB_1
+							if (libusb_control_transfer(udev, 0x40, 0xfe, 4080, nextez + 0xFEA, (char*)&tmp, 2, ComTimeout) == 2)
+#else
+							if (usb_control_msg(udev, 0x40, 0xfe, 4080, nextez + 0xFEA, (char*)&tmp, 2, ComTimeout) == 2)
+#endif
+							{
+								break;
+							}
+							Reattach();
+						}
+
+						break;
+					}
+#endif
 				default:
 					printf("Warning: Unimplemented command 0x%04X\n", (block[2]<<8)|block[3]);
 					break;
