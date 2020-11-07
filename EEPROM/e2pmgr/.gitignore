@@ -1,0 +1,8 @@
+.vs
+My Inspector Results - e2pmgr
+x64
+Win32
+*.user
+*.o
+*.cof
+e2pchk.exe
