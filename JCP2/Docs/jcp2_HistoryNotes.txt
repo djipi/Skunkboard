@@ -12,6 +12,13 @@ Known issues
 -- This behavior can be changed by using the -serial, -ubus and/or -uport parameters in order to connect to a specific Atari Jaguar
 
 
+jcp2 2.08.00 note
+-----------------
+* Merging with the source code, 30th September 2020, from Tursilion
+- The Removers extensions has been turned on for the Visual Studio Project, and off in the Makefile.
+* Updated the Makefile
+* Added a Visual Studio 2022 project
+
 jcp2 2.07.00 note
 -----------------
 * Merging with the source code, 13th June 2020, from The Removers
@@ -61,18 +68,22 @@ jcp packages history
 --------------------
 8 jcp source packages were found here and there, and hereafter a brief summary from the most recents
 
-1) The Removers's package available at https://github.com/sbriais/skunk_jcp has been updated (13 Juin 2020)
--- It contains the fork from tursilion version and enable the Removers extensions.
+1) The package available at https://github.com/tursilion/skunk_jcp can probably be considered as the latest / current "official" one (30 September 2020)
+-- jcp2 has included the modifications.
+2) The package available at https://github.com/tursilion/skunk_jcp (18 June 2020)
+-- It includes also the merge from the The Removers's package
+3) The Removers's package available at https://github.com/sbriais/skunk_jcp has been updated (13 June 2020)
+-- It enables the Removers extensions.
 -- jcp2 has integrated these extensions
-2) The package available at https://github.com/tursilion/skunk_jcp can probably be considered as the latest / current "official" one (8th September 2018)
+4) The package available at https://github.com/tursilion/skunk_jcp (8th September 2018)
 -- Work on jcp2 continued with this source code
-3) The Removers jcp version, rmvjcp.tar.gz, doesn't handle the Skunkboard v3 (or at least they do not display options to handle it)
+5) The Removers jcp version, rmvjcp.tar.gz, doesn't handle the Skunkboard v3 (or at least they do not display options to handle it)
 -- They have added support for the Skunk console communication, but it is unclear if such addition has been done in Tursi code as well
 -- At a point, in 2012, The Removers stopped to update their jcp version and missed the changes/fixes done 6 months later by Tursi/A31Chris
-4) The jcp version in the skunkboard.zip is the oldest jcp source code found
-5) The Skunkboard_full_release.zip file was the container of the newest / most recent jcp source code releases (dated from the 12th August 2012)
+6) The jcp version in the skunkboard.zip is the oldest jcp source code found
+7) The Skunkboard_full_release.zip file was the container of the newest / most recent jcp source code releases (dated from the 12th August 2012)
 -- Work on jcp2 started with this source code
-6) The CJ version has been added in this history but this version looks to follow the tursi code before the jcp2 version done by Tursi
+8) The CJ version has been added in this history but this version looks to follow the tursi code before the jcp2 version done by Tursi
 
 
 jcp previous changes history
@@ -86,3 +97,24 @@ jcp previous changes history
  4 Mar 2009 - Many more updates for SB revision 2, external console, additional safety tests
  6 Apr 2009 - BIOS 1.02.02 added. Improved -b parameter parsing. Implemented inline serial # check. RomDumper waits for console to close.
 
+
+The Removers changes history (13 June 2020)
+-------------------------------------------
+This PR replaces all the SKUNK commands, by two kinds of commands:
+write commands (no response to send to the Jaguar)
+read commands (a response has to be sent to the Jaguar)
+Over this protocol, a set of file operations is provided:
+- write to stderr
+- read stdin
+- open file (on PC)
+- close file
+- read file
+- write file
+- putc into file
+- eof (check end of file)
+- flush (flush content to file)
+- gets (read string from file)
+- getc (read character from file)
+- seek (seek into file)
+- tell (return file size)
+These file operations are available in rmvlib. So it is possible to exchange data between Jaguar and a PC, thanks to The Removers extensions and their rmvlib library.

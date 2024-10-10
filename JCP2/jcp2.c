@@ -63,7 +63,7 @@ May require root priviledges to see the device.
 Thanks to Belboz for the OSX patch!
 Thanks to SebRmv for ideas/fixes in the Skunklib support code
 
-Additional coding by Dilinger @ AA (2014-2019), no Copyright has been broken.
+Additional coding by Dilinger @ AA (2014-2020), no Copyright has been broken.
 */
 
 /* if you don't want to include the BIOS upgrades, comment this out */
@@ -85,10 +85,10 @@ Additional coding by Dilinger @ AA (2014-2019), no Copyright has been broken.
 #endif
 #include <errno.h>
 #include <time.h>
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(WIN32) || defined(WIN64)
 #include <process.h>
 #ifdef LIBUSB_1
-#include <libusb.h>
+#include "libusb-1.0/libusb.h"
 #else
 #include "winusb.h"
 #endif
@@ -123,17 +123,17 @@ Additional coding by Dilinger @ AA (2014-2019), no Copyright has been broken.
 #define JCP_U_VERSION ""
 #endif
 
-#ifdef _WIN64
+#ifdef WIN64
 #define	PLATFORM_NAME	"x64"
 #else
-#ifdef _WIN32
+#ifdef WIN32
 #define	PLATFORM_NAME	"Win32"
-#endif // _WIN32
-#endif // _WIN64
+#endif
+#endif
 
 /* version major.minor.rev */
-#define JCPVERSION 0x020700
-#define	JCP_VERSION	"2.07.00"
+#define JCP2VERSION 0x020800
+#define	JCP2_VERSION	"2.08.00"
 /* ROM based address that we can blindly send dummy data to */
 #define DUMMYBASE 0xFFE000
 /* size of the work buffer (maximum ROM size plus slack) */
@@ -167,20 +167,20 @@ char *szNumDat[16] = {
 };
 
 int nDigits[12][7] = {
-	0,1,1,1,1,1,0,
-	2,3,2,2,2,2,4,
-	12,1,5,6,7,8,4,
-	0,1,5,9,5,1,0,
-	8,10,10,4,11,11,11,
-	4,8,8,0,5,1,0,
-	0,8,8,13,1,1,0,
-	4,5,5,11,2,2,2,
-	0,1,1,0,1,1,0,
-	0,1,1,14,5,5,0,
+	{ 0,1,1,1,1,1,0 },
+	{ 2,3,2,2,2,2,4 },
+	{ 12,1,5,6,7,8,4 },
+	{ 0,1,5,9,5,1,0 },
+	{ 8,10,10,4,11,11,11 },
+	{ 4,8,8,0,5,1,0 },
+	{ 0,8,8,13,1,1,0 },
+	{ 4,5,5,11,2,2,2 },
+	{ 0,1,1,0,1,1,0 },
+	{ 0,1,1,14,5,5,0 },
 	// space, accessed as -1
-	15,15,15,15,15,15,15,
+	{ 15,15,15,15,15,15,15 },
 	// period, accessed as -2
-	15,15,15,15,15,15,6
+	{ 15,15,15,15,15,15,6 }
 };
 
 #ifndef uchar
@@ -308,9 +308,9 @@ int main(int argc, char* argv[])
 
 	// Display version
 #if defined(WIN32) || defined(WIN64)
-	printf("\njcp2 v%s - %s - built on %s\n", JCP_VERSION, PLATFORM_NAME, __DATE__);
+	printf("\njcp2 v%s - %s - built on %s\n", JCP2_VERSION, PLATFORM_NAME, __DATE__);
 #else
-	printf("jcp2 v%02X.%02X.%02X built on %s\n", ((JCPVERSION&0xFF0000)>>16), ((JCPVERSION&0xFF00)>>8), (JCPVERSION&0xFF), __DATE__);
+	printf("jcp2 v%02X.%02X.%02X built on %s\n", ((JCP2VERSION&0xFF0000)>>16), ((JCP2VERSION&0xFF00)>>8), (JCP2VERSION&0xFF), __DATE__);
 #endif
 #ifdef REMOVERS
 	printf("Compiled with the Removers extensions\n");
@@ -2325,8 +2325,12 @@ void HandleConsole(void)
 				case 2:		
 					// get input from the user
 					printf("> ");
-					fgets(buf, 4064, stdin);
+						if (!fgets(buf, 4064, stdin)) {
+							printf("Failed to read from stdin, code %d\n", errno);
+							buf[0]='\0';
+						} else {
 					buf[4063] = '\0';
+						}
 
 					// strip EOL
 					i = (int)strlen(buf) - 1;

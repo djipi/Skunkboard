@@ -1,6 +1,13 @@
 68000
 Backup
 Reports
-vs-2015
 CYGWIN*
 MINGW*
+.depend
+.vs
+Win32
+X64
+*vcxproj.user
+*.bak
+*.o
+jcp2.exe

@@ -121,7 +121,10 @@ void serve_request(char *request, char *reply) {
   case SKUNK_READ_STDIN: {
     LOG("Skunk Read stdin Request\n");
     fprintf(stdout,">");
-    fgets(reply+MSGHDRSZ,MSGLENMAX,stdin);
+    if (!fgets(reply+MSGHDRSZ,MSGLENMAX,stdin)) {
+      LOG("Skunk Read stdin Request failed\n");
+      reply[MSGHDRSZ] = '\0';
+    }
     int len = 1+strlen(reply+MSGHDRSZ); // count the \0
     writeInt16(reply, len);
     break;
