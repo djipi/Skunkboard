@@ -3,3 +3,10 @@ GDB
 JCP
 SkunkLib
 FilesDistribution.xlsx
+Flash/*.bjlSkunkFlash/
+PCB/*.skunk_pcb/
+packaging/*.skunk_pkg
+mtrk/*.skunk_mtrk
+jserve/*.jserve
+USB/*.skunk_usb
+EEPROM/*.e2pmgr
